@@ -23,12 +23,12 @@
   - [x] 1.3 TypeScript und Test-Framework konfigurieren
   - [x] 1.4 Basis-Typen und Interfaces definieren
 
-- [ ] 2.0 Kernlogik für Einsatzplanung implementieren
-  - [ ] 2.1 Algorithmus für faire Verteilung entwickeln
-  - [ ] 2.2 Geschwister-Regel implementieren
-  - [ ] 2.3 Gruppenleiter-Zuweisung implementieren
-  - [ ] 2.4 8:30-Uhr-Regel implementieren
-  - [ ] 2.5 Tests für Planungslogik schreiben
+- [x] 2.0 Kernlogik für Einsatzplanung implementieren
+  - [x] 2.1 Algorithmus für faire Verteilung entwickeln
+  - [x] 2.2 Geschwister-Regel implementieren
+  - [x] 2.3 Gruppenleiter-Zuweisung implementieren
+  - [x] 2.4 8:30-Uhr-Regel implementieren
+  - [x] 2.5 Tests für Planungslogik schreiben
 
 - [ ] 3.0 Abwesenheitsverwaltung entwickeln
   - [ ] 3.1 Datenstruktur für Abwesenheiten erstellen
