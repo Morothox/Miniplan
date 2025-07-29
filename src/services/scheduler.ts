@@ -1,10 +1,14 @@
-import { AltarServer, Mass, Schedule, PlanningError } from '../models/types';
+import { AltarServer, Mass, Schedule, PlanningError, Absence } from '../models/types';
+import { validateAbsenceList } from '../utils/validation';
 
 export class SchedulerService {
   private servers: AltarServer[] = [];
   private groupLeaders: AltarServer[] = [];
+  private absences: Absence[] = [];
 
-  constructor(servers: AltarServer[]) {
+  constructor(servers: AltarServer[], absences: Absence[] = []) {
+    validateAbsenceList(absences, servers);
+    this.absences = absences;
     this.servers = servers.filter(server => !server.isGroupLeader);
     this.groupLeaders = servers.filter(server => server.isGroupLeader);
   }
@@ -14,18 +18,33 @@ export class SchedulerService {
       // Server ist noch nicht für diese Messe eingeteilt
       const isNotAssigned = !assignedServers.includes(server.id);
       
+      // Prüfe, ob der Server an diesem Tag abwesend ist
+      const isAbsent = this.absences.some(absence => 
+        absence.serverId === server.id && absence.date === date
+      );
+
       // Wenn Server ein Geschwisterkind hat, prüfe ob es verfügbar ist
       if (server.siblingId) {
         const sibling = this.servers.find(s => s.id === server.siblingId);
-        return isNotAssigned && sibling && !assignedServers.includes(sibling.id);
+        const isSiblingAbsent = this.absences.some(absence =>
+          absence.serverId === server.siblingId && absence.date === date
+        );
+        return isNotAssigned && !isAbsent && sibling && 
+               !assignedServers.includes(sibling.id) && !isSiblingAbsent;
       }
       
-      return isNotAssigned;
+      return isNotAssigned && !isAbsent;
     });
   }
 
   private getAvailableGroupLeaders(date: string, assignedServers: string[]): AltarServer[] {
-    return this.groupLeaders.filter(leader => !assignedServers.includes(leader.id));
+    return this.groupLeaders.filter(leader => {
+      const isNotAssigned = !assignedServers.includes(leader.id);
+      const isNotAbsent = !this.absences.some(absence =>
+        absence.serverId === leader.id && absence.date === date
+      );
+      return isNotAssigned && isNotAbsent;
+    });
   }
 
   private assignServer(server: AltarServer, assignedServers: string[]): void {

@@ -30,11 +30,11 @@
   - [x] 2.4 8:30-Uhr-Regel implementieren
   - [x] 2.5 Tests für Planungslogik schreiben
 
-- [ ] 3.0 Abwesenheitsverwaltung entwickeln
-  - [ ] 3.1 Datenstruktur für Abwesenheiten erstellen
-  - [ ] 3.2 Validierung von Abwesenheitsmeldungen
-  - [ ] 3.3 Integration in Planungsalgorithmus
-  - [ ] 3.4 Tests für Abwesenheitsverwaltung
+- [x] 3.0 Abwesenheitsverwaltung entwickeln
+  - [x] 3.1 Datenstruktur für Abwesenheiten erstellen
+  - [x] 3.2 Validierung von Abwesenheitsmeldungen
+  - [x] 3.3 Integration in Planungsalgorithmus
+  - [x] 3.4 Tests für Abwesenheitsverwaltung
 
 - [ ] 4.0 N8N-Integration implementieren
   - [ ] 4.1 API-Endpunkte für Abwesenheitsmeldungen erstellen
